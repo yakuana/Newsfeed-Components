@@ -59,7 +59,7 @@ function createMenu(menuArray) {
     menuList.appendChild(listItem)
   });
 
-  console.log("current menu", menuList); 
+  // console.log("current menu", menuList); 
 
   
   // select menu-button currently on the DOM 
@@ -73,11 +73,14 @@ function createMenu(menuArray) {
 
     // toggles menu open/close 
     menu.classList.toggle("menu--open"); 
+    
   })
 
   return menu; 
 }
 
-const domMenuButton = document.querySelector(".menu-button"); 
+// get the parent container of the menu 
+const domHeader = document.querySelector(".header"); 
 
-domMenuButton.appendChild(createMenu(menuItems)); 
+// append the menu to the header 
+domHeader.appendChild(createMenu(menuItems)); 
