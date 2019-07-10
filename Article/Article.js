@@ -112,3 +112,61 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+function createPanel(date, title, firstParagraph, secondParagraph, thirdParagraph) {
+  
+  // define new elements 
+  const article = document.createElement("div"); 
+  const articleHeader = document.createElement("h2"); 
+  const articleDate = document.createElement("p"); 
+  const articleText1 = document.createElement("p");
+  const articleText2 = document.createElement("p");
+  const articleText3 = document.createElement("p");
+  const articleButton = document.createElement("span"); 
+
+  // create structure of elements  
+  article.appendChild(articleHeader); 
+  article.appendChild(articleDate); 
+  article.appendChild(articleText1); 
+  article.appendChild(articleText2); 
+  article.appendChild(articleText3); 
+  article.appendChild(articleButton); 
+
+  // assign class names 
+  article.classList.add("article"); 
+  articleDate.classList.add("date"); 
+  articleButton.classList.add("expandButton"); 
+
+  // set text content 
+  articleHeader.textContent = title; 
+  articleDate.textContent = date; 
+  articleText1.textContent = firstParagraph;
+  articleText2.textContent = secondParagraph;
+  articleText3.textContent = thirdParagraph;
+  articleButton.textContent = 'Expand'; 
+
+  // button event 
+  articleButton.addEventListener("click", event => {
+    // check if button has been clicked 
+    console.log('button clicked', event.target); 
+
+    // toggle article-open class on/off 
+    article.classList.toggle("article-open");
+    
+    // check if article-open class is on/off 
+    console.log('article with class', article);
+  })
+
+  return article; 
+}
+
+const articles = document.querySelector(".articles"); 
+
+// map over the data, creating a component for each oject
+data.forEach(element => {
+  // check what the element is
+  console.log("current element:", element);
+
+  // append the element items to the articles parent div 
+  articles.appendChild(createPanel(element.date, element.title, element.firstParagraph, element.secondParagraph, element.thirdParagraph));
+});
