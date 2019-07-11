@@ -85,7 +85,39 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+
+  {
+    title: 'New Article 1',
+    date: 'July 11th, 2019',
+    firstParagraph: `Bulbasaur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ivysaur Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Venusaur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Charmander Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit. Charmeleon Lorem ipsum dolor sit amet, consectetur adipiscing elit. Charizard Lorem`,
+
+    secondParagraph: `Pidgey Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pidgeotto Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Nidorina Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidoqueen Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Nidoran Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidorino Lorem ipsum dolor
+        sit amet, consectetur adipiscing elit. Nidoking Lorem ipsum`,
+
+    thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel 
+        Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James 
+        Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous.`
+  },
+
+  {
+    title: 'New Article 2',
+    date: 'July 12th, 2019',
+    firstParagraph: `Bulbasaur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ivysaur Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Venusaur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Charmander Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit. Charmeleon Lorem ipsum dolor sit amet, consectetur adipiscing elit. Charizard Lorem`,
+
+    secondParagraph: `Pidgey Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pidgeotto Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit.`,
+
+    thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel 
+        Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James 
+        Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous.`
+  },
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -112,3 +144,61 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+function createPanel(date, title, firstParagraph, secondParagraph, thirdParagraph) {
+  
+  // define new elements 
+  const article = document.createElement("div"); 
+  const articleHeader = document.createElement("h2"); 
+  const articleDate = document.createElement("p"); 
+  const articleText1 = document.createElement("p");
+  const articleText2 = document.createElement("p");
+  const articleText3 = document.createElement("p");
+  const articleButton = document.createElement("span"); 
+
+  // create structure of elements  
+  article.appendChild(articleHeader); 
+  article.appendChild(articleDate); 
+  article.appendChild(articleText1); 
+  article.appendChild(articleText2); 
+  article.appendChild(articleText3); 
+  article.appendChild(articleButton); 
+
+  // assign class names 
+  article.classList.add("article"); 
+  articleDate.classList.add("date"); 
+  articleButton.classList.add("expandButton"); 
+
+  // set text content 
+  articleHeader.textContent = title; 
+  articleDate.textContent = date; 
+  articleText1.textContent = firstParagraph;
+  articleText2.textContent = secondParagraph;
+  articleText3.textContent = thirdParagraph;
+  articleButton.textContent = 'Expand'; 
+
+  // button event 
+  articleButton.addEventListener("click", event => {
+    // check if button has been clicked 
+    console.log('button clicked', event.target); 
+
+    // toggle article-open class on/off 
+    article.classList.toggle("article-open");
+    
+    // check if article-open class is on/off 
+    console.log('article with class', article);
+  })
+
+  return article; 
+}
+
+const articles = document.querySelector(".articles"); 
+
+// map over the data, creating a component for each oject
+data.forEach(element => {
+  // check what the element is
+  console.log("current element:", element);
+
+  // append the element items to the articles parent div 
+  articles.appendChild(createPanel(element.date, element.title, element.firstParagraph, element.secondParagraph, element.thirdParagraph));
+});
